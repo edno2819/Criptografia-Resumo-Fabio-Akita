@@ -3,9 +3,9 @@
 
 Baseado nos videos de criptografia do Fabio Akita:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CcU5Kc_FN_4?si=HhVMmtPzVMy99gxt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+- [Video 1](https://www.youtube.com/watch?v=CcU5Kc_FN_4&ab_channel=FabioAkita)
+- [Video 2](https://www.youtube.com/watch?v=HCHqtpipwu4&ab_channel=FabioAkita)
 
-<br/>
 <br/>
 
 Muitos desenvolvedores negligenciam a importância da segurança em seus códigos. Há 20 anos, era comum ver programadores concatenando manualmente comandos SQL com inputs dos usuários, um erro que poderia levar a vulnerabilidades graves, como SQL Injection. Felizmente, frameworks modernos como Rails, Django, Laravel e ASP.NET fornecem ORMs (Object-Relational Mapping) que ajudam a sanar essas falhas, evitando grande parte dos ataques.
