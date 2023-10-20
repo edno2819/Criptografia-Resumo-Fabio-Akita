@@ -55,7 +55,8 @@ Em conclusão, segurança e criptografia são aspectos cruciais no desenvolvimen
 Estas funções recebem uma entrada e produzem uma saída de tamanho fixo, independentemente do tamanho da entrada.
 Ao contrário da encriptação, as funções de hash são de direção única e são irreversíveis.
 Exemplos incluem `MD5`, `SHA1`, `SHA2` e `SHA3`.
-Diferenças entre Funções de Hash e Encriptação:
+
+#### Diferenças entre Funções de Hash e Encriptação:
 
 Enquanto a encriptação permite a reversão do processo (decriptação), as funções de hash não.
 Algoritmos de hashing comuns, como MD5 e SHA1, foram considerados inseguros devido a vulnerabilidades. O MD5 por exemplo é ótimo para ser usado em verificação da integridade de arquivos, porém não é bom para criar criar hash de senhas, pois é computacionalemnte rápido facilitando o ataque de força bruta.
@@ -77,12 +78,17 @@ Um ótimo exemplo disto é o trabalho https://natmchugh.blogspot.com/2015/02/cre
 
 A entrada é dividida em blocos e processada para produzir uma saída de tamanho fixo.
 Operações matemáticas são aplicadas a cada bloco, com resultados anteriores influenciando o processamento de blocos subsequentes.
-Problemas Comuns:
+
+#### Problemas Comuns:
 
 - `Ataques de Colisão`: Ocorrem quando duas entradas diferentes produzem o mesmo hash. Isso compromete a integridade da função.
     * `Paradoxo do aníversário`: Se 23 pessoas forem escolhidas aleatoriamente, a chance de pelo menos duas delas terem a mesma data de aniversário é maior do que 50. Isso nós alerta da probabilidade de diferentes senhas compatilharem hash iguais, assim é possivel acessar uma conta usando uma senha diferente mais que gere o mesmo hash.
 
         ![Alt text](image-2.png)
+- Quando o atacante modifica o arquivo de forma calculada produzindo o mesmo hash de saida.
+  
+- `Ataques de Extensão de Comprimento`: Um atacante pode adicionar dados adicionais à entrada e calcular um novo hash sem conhecer a entrada original.
+  
 
 ```python
 import hashlib
@@ -95,9 +101,7 @@ if hash1 == hash2:
     print("Colisão encontrada!")
 ```
 
-- `Ataques de Extensão de Comprimento`: Explorem a maneira como os algoritmos de hash processam blocos de entrada.
-- Quando o atacante modifica o arquivo de forma calculada produzindo o mesmo hash de saida.
-Ataques de Extensão de Comprimento: Um atacante pode adicionar dados adicionais à entrada e calcular um novo hash sem conhecer a entrada original.
+
 
 Suponha que temos um algoritmo de hash muito básico para strings chamado simpleHash que retorna a soma dos valores ASCII de cada caractere da string, módulo 1000. Ou seja, ele converte cada letra em seu valor ASCII, soma esses valores e, em seguida, toma o módulo 1000 do resultado.
 
@@ -127,10 +131,11 @@ simpleHash("BA") = (66 + 65) % 1000
 #### Usos de Funções de Hash:
 
 - Verificar a integridade dos dados transmitidos.
-    * Ex: Se um contrato passado para o email não foi interceptado e alterado, com o hash é possível verificar a integridade.
+    * Ex: Verificar a integridade de um contrato passado via email. Se faz o hash do contrato antes de ser enviado e ao receber. Se ambos os hash baterem provavelmente o contrato não foi alterado.
+  
 * Criar uma impressão digital única para a entrada.
-Conclusão:
 
+#### Conclusão:
 Enquanto as funções de hash são poderosas e têm uma variedade de usos, é crucial usar algoritmos de hashing seguros e atualizados para garantir a integridade e segurança dos dados.
 
 Exemplo de um código sem uso de libs: 
@@ -155,12 +160,9 @@ Para evitar os ataques mencionados, o HMAC foi introduzido. Em vez de apenas has
 SHA3, um algoritmo mais recente, naturalmente tem características de HMAC, tornando-o mais seguro contra esses ataques.
 Hashes e Senhas:
 
-Hashing de senhas é uma prática comum para armazenamento seguro. No entanto, muitos usuários têm senhas fracas, facilitando ataques de dicionário.
-Tais ataques utilizam tabelas pré-computadas de hashes para comparar rapidamente e identificar senhas. Além disso, apesar de colisões (dois inputs diferentes produzindo o mesmo hash) serem raras, elas são matematicamente possíveis.
-Paradoxo do Aniversário:
+Hashing de senhas é uma prática comum para armazenamento seguro. No entanto, muitos usuários têm senhas fracas, facilitando ataques de dicionário. Tais ataques utilizam tabelas pré-computadas de hashes para comparar rapidamente e identificar senhas. Além disso, apesar de colisões (dois inputs diferentes produzindo o mesmo hash) serem raras, elas são matematicamente possíveis.
 
-O paradoxo explica que a probabilidade de duas pessoas em uma sala de 30 terem o mesmo aniversário é de cerca de 70%. Isso ilustra como colisões em funções hash podem ser mais comuns do que se espera.
-UUID e GUID:
+#### UUID e GUID:
 
 Se precisa de identificadores únicos, deve-se usar UUID ou GUID, e não hashes como SHA256. Ambos UUID e GUID são identificadores de 128 bits, mas são projetados para minimizar a chance de colisão.
 Exemplo em Python: Demonstração de como um HMAC pode ser gerado.
@@ -183,7 +185,7 @@ Um ataque de força bruta é a tentativa de descobrir o segredo criptográfico u
 
 A capacidade de um processador ou de um sistema para calcular hashes é geralmente medida em "hashes por segundo" (H/s). Isso indica quantos cálculos de hash a máquina ou o sistema pode realizar em um único segundo. Para o campo de mineração de criptomoedas, essas taxas são cruciais, pois determinam a eficiência de um minerador em competir por recompensas de bloco.
 
-Para se ter noção hoje o processador <a href="https://www.viperatech.com/product/bitcoin-miner-s19-xp-hyd/">Antminer S19XP Hydro</a> usado para mineração de bitcoin tem uma taxa de resolução de hash de 257TH/s ou seja 257 trilhões de hashes por segundo. A titulo de comparação o processador Intel top de linha `Blockscale ASIC` consegue atingir uma taxa de 580 GH/s ou seja bilhões de hashes por segundo.
+Para se ter noção hoje o processador <a target="_blank" href="https://www.viperatech.com/product/bitcoin-miner-s19-xp-hyd/">Antminer S19XP Hydro</a> usado para mineração de bitcoin tem uma taxa de resolução de hash de 257TH/s ou seja 257 trilhões de hashes por segundo. A titulo de comparação o processador Intel top de linha `Blockscale ASIC` consegue atingir uma taxa de 580 GH/s ou seja bilhões de hashes por segundo.
 
 Essa informação é importante, pois muitos dos algorítimos sendo utilizados hoje é na intenção de dificultar e tornar inviável computacionalmente ou financeiramente(custos em manter o funcionamento desses hardawares) os ataques de força bruta.
 
@@ -207,7 +209,7 @@ Outro aspecto de segurança importante para se conhecer é o SWAP File. E uma ex
 
 Como o arquivo SWAP pode conter partes da memória que foram transferidas para o disco, um invasor que ganhe acesso ao sistema e ao arquivo SWAP pode potencialmente recuperar informações sensíveis, como senhas, chaves de criptografia ou outros dados privados.
 
-A intel por exemplo possui o <a href="https://www.intel.com/content/www/us/en/architecture-and-technology/software-guard-extensions.html">SGX</a> (SAFE GUARD EXTENSIONS), no qual isola aplicações que contenham dados sensíveis, em uma região privada da memória chamadas enclaves, tornando o acesso a essas informações difíceis a potenciais invasores.
+A intel por exemplo possui o <a target="_blank" href="https://www.intel.com/content/www/us/en/architecture-and-technology/software-guard-extensions.html">SGX</a> (SAFE GUARD EXTENSIONS), no qual isola aplicações que contenham dados sensíveis, em uma região privada da memória chamadas enclaves, tornando o acesso a essas informações difíceis a potenciais invasores.
 
 ### Encriptação simétrica de chaves
 
@@ -237,7 +239,7 @@ Ao usar a encriptação simétrica, é essencial garantir que a chave permaneça
 
 A encriptação assimétrica, também conhecida como criptografia de chave pública, diferente da criptação simétrica, é uma técnica que utiliza dois tipos de chaves: uma chave pública e uma chave privada. Estas chaves são matematicamente relacionadas, mas, na prática, é computacionalmente inviável derivar a chave privada a partir da chave pública.
 
-Para a utilização desse tipo de encriptação a primeira parte é a troca das chaves públicas e privadas. Mas como fazer isso de uma maneira segura? Uma das primeiras soluções é o algoritmo <a href="https://pt.wikipedia.org/wiki/Troca_de_chaves_de_Diffie%E2%80%93Hellman">Diffie-Hellman</a>. O protocolo se baseia em propriedades matemáticas de logaritmos discretos em um campo finito. Especificamente, ele explora o fato que, enquanto é relativamente fácil computacionalmente calcular potências modulares (exponenciação modular), é difícil fazer o oposto (logaritmo discreto) em um tempo razoável.
+Para a utilização desse tipo de encriptação a primeira parte é a troca das chaves públicas e privadas. Mas como fazer isso de uma maneira segura? Uma das primeiras soluções é o algoritmo <a target="_blank" href="https://pt.wikipedia.org/wiki/Troca_de_chaves_de_Diffie%E2%80%93Hellman">Diffie-Hellman</a>. O protocolo se baseia em propriedades matemáticas de logaritmos discretos em um campo finito. Especificamente, ele explora o fato que, enquanto é relativamente fácil computacionalmente calcular potências modulares (exponenciação modular), é difícil fazer o oposto (logaritmo discreto) em um tempo razoável.
 
 O protocolo Diffie-Hellman é vulnerável ao ataque de Man-in-the-Middle (MitM). Aqui está uma descrição simplificada de como esse ataque funciona:
 ![Alt text](image-5.png)
@@ -246,7 +248,7 @@ Para combater vulnerabilidades como o ataque de MitM no Diffie-Hellman, o protoc
 
 Durante o handshake, além de trocar as partes públicas como no Diffie-Hellman tradicional, as partes também trocam assinaturas digitais destas partes públicas. Cada parte pode então verificar a assinatura da outra parte usando a chave pública conhecida da outra parte. Se a assinatura for verificada corretamente, cada parte pode ter certeza de que a parte pública que recebeu é genuína e não foi interceptada ou alterada por um atacante.
 
-Agora com uma maneira de se transmitir as chaves públicas de uma maneira mais segura, precisamos de um algorítimo de criptografia. E uma das principais opções é o <a href="https://www.techtarget.com/searchsecurity/definition/RSA#:~:text=RSA%20is%20a%20type%20of,is%20used%20to%20decrypt%20it.">RSA</a>, cujo nome deriva dos sobrenomes dos seus inventores (Ron Rivest, Adi Shamir e Leonard Adleman), é um dos algorítmos de criptografia de chave pública mais populares e influentes. Foi introduzido em 1977 e revolucionou o campo da criptografia, permitindo tanto a cifragem como a assinatura digital usando um esquema de chave pública. 
+Agora com uma maneira de se transmitir as chaves públicas de uma maneira mais segura, precisamos de um algorítimo de criptografia. E uma das principais opções é o <a target="_blank" href="https://www.techtarget.com/searchsecurity/definition/RSA#:~:text=RSA%20is%20a%20type%20of,is%20used%20to%20decrypt%20it.">RSA</a>, cujo nome deriva dos sobrenomes dos seus inventores (Ron Rivest, Adi Shamir e Leonard Adleman), é um dos algorítmos de criptografia de chave pública mais populares e influentes. Foi introduzido em 1977 e revolucionou o campo da criptografia, permitindo tanto a cifragem como a assinatura digital usando um esquema de chave pública. 
 
 - `Fundamento Matemático`: O RSA baseia-se na dificuldade de fatorar grandes números compostos. Se um número é produto de dois números primos de tamanho semelhante (e ambos os primos são desconhecidos), atualmente não existe nenhum algoritmo eficiente conhecido que possa fatorar esse número em um tempo razoável.
 
@@ -270,24 +272,24 @@ O TLS (Transport Layer Security) e seu predecessor, SSL (Secure Sockets Layer), 
 ![Alt text](image-6.png)
 
 
-### Agora um resumo de algumas das principais técnicas utilizadas na área de criptografia e segurança.
+### Agora um resumo de algumas das principais técnicas utilizadas na área de criptografia e segurança atualmente.
 
 #### Criptografia Simétrica:
-- `AES` (Advanced Encryption Standard): Talvez o mais amplamente reconhecido e utilizado algoritmo de criptografia simétrica. É utilizado em várias aplicações, desde VPNs a sistemas de pagamento.
+- <a target="_blank" href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES</a> (Advanced Encryption Standard): Talvez o mais amplamente reconhecido e utilizado algoritmo de criptografia simétrica. É utilizado em várias aplicações, desde VPNs a sistemas de pagamento.
 
-- `Blowfish e Twofish`: Algorítmos de criptografia simétrica desenvolvidos como alternativas ao DES. Twofish foi um dos finalistas no processo de seleção do AES.
+- <a target="_blank" href="https://gigmocha.com/twofish-vs-blowfish-encryption-differences/">Blowfish e Twofish</a>: Algorítmos de criptografia simétrica desenvolvidos como alternativas ao DES. Twofish foi um dos finalistas no processo de seleção do AES.
 
 #### Criptografia Assimétrica:
 
-- `RSA` (Rivest–Shamir–Adleman): Um dos algoritmos de chave pública mais amplamente utilizados. É usado tanto para cifragem quanto para assinatura digital.
-- `DSA` (Digital Signature Algorithm): Usado principalmente para assinaturas digitais.
-- `ECC` (Elliptic Curve Cryptography): Baseado nas propriedades matemáticas das curvas elípticas e pode oferecer segurança comparável com chaves mais curtas em relação ao RSA e ao DSA.
-- `Diffie-Hellman`: Utilizado para troca segura de chaves, permitindo que duas partes estabeleçam uma chave secreta compartilhada.
+- <a target="_blank" href="https://www.techtarget.com/searchsecurity/definition/RSA#:~:text=RSA%20is%20a%20type%20of,is%20used%20to%20decrypt%20it.">RSA</a> (Rivest–Shamir–Adleman): Um dos algoritmos de chave pública mais amplamente utilizados. É usado tanto para cifragem quanto para assinatura digital.
+- <a target="_blank" href="https://en.wikipedia.org/wiki/Digital_Signature_Algorithm">DSA</a> (Digital Signature Algorithm): Usado principalmente para assinaturas digitais.
+- <a target="_blank" href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">ECC</a> (Elliptic Curve Cryptography): Baseado nas propriedades matemáticas das curvas elípticas e pode oferecer segurança comparável com chaves mais curtas em relação ao RSA e ao DSA.
+- <a target="_blank" href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">Diffie-Hellman</a>: Utilizado para troca segura de chaves, permitindo que duas partes estabeleçam uma chave secreta compartilhada.
 
 #### Funções Hash Criptográficas:
-- `SHA-2`: Uma família de funções hash que inclui SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224 e SHA-512/256. Atualmente, é seguro e amplamente utilizado.
-- `SHA-3`: Publicado em 2015, é a mais recente família de funções hash padrão aprovado pelo NIST e serve como uma alternativa ao SHA-2.
+- <a target="_blank" href="https://en.wikipedia.org/wiki/SHA-2">SHA-2</a>: Uma família de funções hash que inclui SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224 e SHA-512/256. Atualmente, é seguro e amplamente utilizado.
+- <a target="_blank" href="https://en.wikipedia.org/wiki/SHA-3">SHA-3</a>: Publicado em 2015, é a mais recente família de funções hash padrão aprovado pelo NIST e serve como uma alternativa ao SHA-2.
 
 #### Protocolos de Segurança:
-- `SSL/TLS`: Utilizados para proteger comunicações na web e em muitos outros protocolos. O SSL foi o precursor do TLS.
-- `PGP` (Pretty Good Privacy) e `GPG` (GNU Privacy Guard): Usados para cifrar e assinar e-mails e outros dados.
+- <a target="_blank" href="https://www.hostinger.com.br/tutoriais/o-que-e-ssl-tls-https">SSL/TLS</a>: Utilizados para proteger comunicações na web e em muitos outros protocolos. O SSL foi o precursor do TLS.
+- <a target="_blank" href="https://www.varonis.com/blog/pgp-encryption">PGP</a> (Pretty Good Privacy) e <a target="_blank" href="https://pt.wikipedia.org/wiki/GNU_Privacy_Guard">GPG</a> (GNU Privacy Guard): Usados para cifrar e assinar e-mails e outros dados.
