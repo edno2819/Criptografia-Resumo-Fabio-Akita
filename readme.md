@@ -187,7 +187,7 @@ A capacidade de um processador ou de um sistema para calcular hashes é geralmen
 
 Para se ter noção hoje o processador <a target="_blank" href="https://www.viperatech.com/product/bitcoin-miner-s19-xp-hyd/">Antminer S19XP Hydro</a> usado para mineração de bitcoin tem uma taxa de resolução de hash de 257TH/s ou seja 257 trilhões de hashes por segundo. A titulo de comparação o processador Intel top de linha `Blockscale ASIC` consegue atingir uma taxa de 580 GH/s ou seja bilhões de hashes por segundo.
 
-Essa informação é importante, pois muitos dos algorítimos sendo utilizados hoje é na intenção de dificultar e tornar inviável computacionalmente ou financeiramente(custos em manter o funcionamento desses hardawares) os ataques de força bruta.
+Essa informação é importante, pois muitos dos algorítimos sendo utilizados hoje tem como finalidade dificultar e tornar inviável computacionalmente ou financeiramente (custos em manter o funcionamento desses hardawares) os ataques de força bruta.
 
 Um motivo para querer que um algorítimo de Hash seja computacionalmente mais pesado, afim de dificultar a utilização de força bruta.
 
